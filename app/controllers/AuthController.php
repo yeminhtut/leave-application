@@ -1,6 +1,6 @@
 <?php
 
-class HomeController extends BaseController {
+class AuthController extends \BaseController {
 
 	public function showWelcome()
 	{
@@ -8,14 +8,13 @@ class HomeController extends BaseController {
 	}
 	public function showLogin()
 	{
-	    // show the form
-	    return View::make('users.login');    
-		
+		// show the form
+	    return View::make('users.login'); 
 	}
 
 	public function doLogin()
 	{
-	// process the form
+		// process the form
 		// validate the info, create rules for the inputs
 		$rules = array(
 		    'email'    => 'required|email', // make sure the email is an actual email
@@ -52,4 +51,6 @@ class HomeController extends BaseController {
 	    Auth::logout(); // log the user out of our application
 	    return Redirect::to('login'); // redirect the user to the login screen
 	}
+
+
 }

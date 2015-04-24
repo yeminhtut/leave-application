@@ -16,7 +16,6 @@ class ArticleController extends \BaseController {
             ->with('articles', $articles);
 	}
 
-
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -26,7 +25,6 @@ class ArticleController extends \BaseController {
 	{
 		return View::make('articles.create');
 	}
-
 
 	/**
 	 * Store a newly created resource in storage.
@@ -117,12 +115,12 @@ class ArticleController extends \BaseController {
         } else {
             // store
             $nerd = Article::find($id);
-            $nerd->title       = Input::get('title');
-            $nerd->content      = Input::get('content');            
+            $nerd->title = Input::get('title');
+            $nerd->content  = Input::get('content');            
             $nerd->save();
 
             // redirect
-            Session::flash('message', 'Successfully updated nerd!');
+            Session::flash('message', 'Successfully updated article!');
             return Redirect::to('articles');
         }
 	}
@@ -141,7 +139,7 @@ class ArticleController extends \BaseController {
         $article->delete();
 
         // redirect
-        Session::flash('message', 'Successfully deleted the nerd!');
+        Session::flash('message', 'Successfully deleted the article!');
         return Redirect::to('articles');
 	}
 

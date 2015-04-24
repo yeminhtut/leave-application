@@ -15,42 +15,55 @@ Route::get('/about', function()
 // API ROUTES ==================================
 // =============================================
 Route::group(array('prefix' => 'api'), function() {
-
 	// since we will be using this just for CRUD, we won't need create and edit
 	// Angular will handle both of those forms
 	// this ensures that a user can't access api/create or api/edit when there's nothing there
 	Route::resource('comments', 'CommentController', 
 		array('except' => array('create', 'edit', 'update')));
 });
-//Article//
-Route::resource('articles', 'ArticleController');
+// //Article//
+// Route::resource('articles', 'ArticleController');
 //Login/Logout
-Route::get('login', array('uses' => 'HomeController@showLogin'));
+Route::get('login', array('uses' => 'AuthController@showLogin'));
 // route to process the form
-Route::post('login', array('uses' => 'HomeController@doLogin'));
+Route::post('login', array('uses' => 'AuthController@doLogin'));
 
-Route::get('logout', array('uses' => 'HomeController@doLogout'));
+Route::get('logout', array('uses' => 'AuthController@doLogout'));
 
+// Route::get('travel/package/{id}/{title}', array('uses' => 'ArticleController@show'));
 
-Route::group(array('prefix' => 'admin','before' => 'auth'), function()
-{
+// Route::resource('contacts', 'ContactController');
 
-    Route::get('/', function()
-    {
-        return View::make('admin.dashboard');
-    });
-    Route::get('/edit', function()
-    {
-        echo 'edit';
-    });
-
-
+Route::group(array('before'=>'auth'), function() {   
+    Route::resource('admin', 'AdminController');
 });
 
-// Route::get('admin', array('before' => 'auth', function()
-// {
-//     return View::make('admin.dashboard');
-// }));
+// Route::group(array('games'), function() {
+// 	Route::resource('game', 'gameController');
+// });
+
+// Route::resource('projects', 'ProjectsController');
+// Route::resource('tasks', 'TasksController');
+// Route::resource('projects.tasks', 'TasksController');
+
+// Route::bind('tasks', function($value, $route) {
+// 	return App\Task::whereSlug($value)->first();
+// });
+// Route::bind('projects', function($value, $route) {
+// 	return App\Project::whereSlug($value)->first();
+// });
+
+// Bind route parameters.
+//Route::model('game', 'Game');
+
+// Route::get('custom/response', function()
+//  {
+//  $response = Response::make('Hello world!', 200);
+//  $response->headers->set('our key', 'our value');
+//  return $response;
+//  });
+
+
 // =============================================
 // CATCH ALL ROUTE =============================
 // =============================================
@@ -58,5 +71,15 @@ Route::group(array('prefix' => 'admin','before' => 'auth'), function()
 // this allows angular to route them
 App::missing(function($exception)
 {
-	return View::make('index');
+	return View::make('404/404');
 });
+
+// Route::get('/{slug}/{id}',function($slug,$id){
+// 	if (Auth::guest()) {
+// 		return "you don't have permission to see";
+// 	}
+	
+// 	return "slug is {$slug} and id is {$id}.";
+	
+	
+// });

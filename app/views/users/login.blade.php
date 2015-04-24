@@ -1,28 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<title>Look at me Login</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container">
 
-{{ Form::open(array('url' => 'login')) }}
 <h1>Login</h1>
-
-<!-- if there are login errors, show them here -->
-<p>
-    {{ $errors->first('email') }}
-    {{ $errors->first('password') }}
-</p>
-
-<p>
-    {{ Form::label('email', 'Email Address') }}
-    {{ Form::text('email', Input::old('email'), array('placeholder' => 'awesome@awesome.com')) }}
-</p>
-
-<p>
-    {{ Form::label('password', 'Password') }}
-    {{ Form::password('password') }}
-</p>
-
-<p>{{ Form::submit('Submit!') }}</p>
+{{ Form::open(array('url' => 'login')) }}
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" name="email" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
 {{ Form::close() }}
+</div>
+</body>
+</html>
